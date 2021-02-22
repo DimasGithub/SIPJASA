@@ -1,0 +1,74 @@
+{% extends "dasar.html" %}
+{% load humanize %}
+{% block nav %}
+{% include "snippets/nav.html" %}
+{% endblock nav %}
+{% block konten %}
+<style>
+    td{
+      vertical-align: top;
+    }
+</style>
+<div style="margin:20px;">
+    <form method="POST" enctype="multipart/form-data">
+    {% csrf_token %}
+    <table style="width: 100%; margin-bottom: 30px; box-shadow: 7px 7px 20px; border-radius: 30px; " border="0">
+        <tbody>
+        <tr> 
+            <td>&nbsp;</td>
+            <td colspan="5" style="height: 10px;"><h4 class="mb-4" style="margin-top:20px;">Berikan Nilai Jasa Pelayanan</h4><hr></td>
+        </tr>    
+        <tr>
+            <td>&nbsp;</td>
+            <td style="width: 20%;">Nilai</td>
+            <td>:</td>
+            <td> <select name="nilai" class="form-control" placeholder="nilai" style="border-radius:20px; margin-bottom: 10px;" id="id_nilai">
+                  <option value=5>5</option>
+                  <option value=4>4</option>
+                  <option value=3>3</option>
+                  <option value=2>2</option>
+                  <option value=1>1</option>
+                </select> </td>
+            <td>&nbsp;</td>
+        </tr>
+        <tr>
+        <td>&nbsp;</td>
+        <td>Ulasan</td>
+        <td>:</td>
+        <td><textarea name="ulasan" id="" class="form-control" style="border-radius:20px; width: 100%; height: 150px; margin-bottom: 10px; "></textarea></td>
+        
+    </tr>
+    <tr>
+        <td>&nbsp;</td>
+        <td>Unggah foto</td>
+        <td>:</td>
+        <td>
+            <div class="form-control custom-file" style="border:0">
+                <input type="file" name="upload_foto" class="custom-file-input"   style= "border-radius: 20px; margin-bottom: 10px;" accept="image/*">
+                <label class="custom-file-label text-truncate" for="id_upload_foto">---</label>
+                <script type="text/javascript" id="script-id_upload_foto">        
+                    document.getElementById("script-id_upload_foto").parentNode.querySelector('.custom-file-input').onchange =  function (e){
+                        var filenames = "";
+                        for (let i=0;i<e.target.files.length;i++){
+                            filenames+=(i>0?", ":"")+e.target.files[i].name;
+                        }
+                        e.target.parentNode.querySelector('.custom-file-label').textContent=filenames;    
+                    }        
+                </script>
+            </div>
+        </td>
+    </tr>
+        <tr>
+            <td>&nbsp;</td>
+            <td style="height:50px;"><button type="submit" class="btn btn-md btn-primary" style="border-radius: 50px; ">Submit</button>
+                <a href="{% url 'customer:indexcart' %}" class="btn btn-secondary btn-md " role="button" aria-pressed="true" style="border-radius: 50px;">Batal</a></td>
+            </td>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+        </tr>   
+        </tbody>
+        </table>
+    </form>
+</div>
+{% endblock konten %}

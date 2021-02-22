@@ -1,0 +1,85 @@
+{% extends "dasar.html" %}
+{% load crispy_forms_tags %}
+{% block style %}
+<style>
+td{
+  vertical-align: top;
+}
+</style>
+{% endblock style %}
+{% block nav %}
+{% include "snippets/navprovider.html" %}
+{% endblock nav %}
+{% block konten %}
+<div style="margin:20px;">
+<h2 class="mb-4">{{header}}</h2>
+<p>Isikan data jasa dengan lengkap</p>
+<form method="POST" enctype="multipart/form-data" novalidate>
+{% csrf_token %}
+        <table style= "height: 500px; width: 100%; margin-bottom: 30px; box-shadow: 7px 7px 20px; border-radius: 30px;" border="0">
+        <tbody>
+        <tr>
+        <td>&nbsp;</td>
+        <td colspan="4"><h4 class="mb-4" style="margin-top:5px;">Masukan Infomasi Profil Jasa Anda</h4><hr></td>
+        </tr>
+        <tr>
+        <td>&nbsp;</td>
+        <td>{{forms.nama_jasa.label}}</td>
+        <td>:</td>
+        <td>{{forms.nama_jasa|as_crispy_field}}</td>
+        <td>&nbsp;</td>
+        </tr>
+        <tr>
+        <td>&nbsp;</td>
+        <td>{{forms.pemilik_jasa.label}}</td>
+        <td>:</td>
+        <td>{{forms.pemilik_jasa|as_crispy_field}}</td>
+        <td>&nbsp;</td>
+        </tr>
+        <tr>
+        <td>&nbsp;</td>
+        <td>{{forms.email_jasa.label}}</td>
+        <td>:</td>
+        <td>{{forms.email_jasa|as_crispy_field}}</td>
+        <td>&nbsp;</td>
+        </tr>
+        <tr>
+        <td>&nbsp;</td>
+        <td>{{forms.no_telp.label}}</td>
+        <td>:</td>
+        <td>{{forms.no_telp|as_crispy_field}}</td>
+        <td>&nbsp;</td>
+        </tr>
+        <tr>
+        <td>&nbsp;</td>
+        <td>{{forms.kecamatan.label}}</td>
+        <td>:</td>
+        <td>{{forms.kecamatan|as_crispy_field}}</td>
+        <td>&nbsp;</td>
+        </tr>
+        <tr>
+        <td>&nbsp;</td>
+        <td>{{forms.alamat.label}}</td>
+        <td>:</td>
+        <td>{{forms.alamat|as_crispy_field}}</td>
+        <td>&nbsp;</td>
+        </tr>
+        <tr>
+        <td>&nbsp;</td>
+        <td>{{forms.deskripsi_jasa.label}}</td>
+        <td>:</td>
+        <td>{{forms.deskripsi_jasa|as_crispy_field}}</td>
+        <td>&nbsp;</td>
+        </tr>
+        <tr>
+        <td>&nbsp;</td>
+        <td colspan="3"><button type="submit" class="btn btn-md btn-primary" style="margin-right: 10px; margin-bottom: 20px; border-radius: 50px; ">Submit</button> 
+        <a href="{% url 'provider:indexprovider' %}" class="btn btn-secondary btn-md " style=" margin-bottom:20px; border-radius: 50px; margin-right:20px; " role="button" aria-pressed="true">Batal</a></td>
+        
+        </td>
+        </tr>
+        </tbody>
+        </table>
+</form>
+</div>
+{% endblock konten %}

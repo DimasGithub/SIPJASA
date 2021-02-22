@@ -1,0 +1,118 @@
+{% extends "dasar.html" %} 
+{% block nav %}
+{% include "snippets/navprovider.html" %}
+{% endblock nav %}
+{% block style %}
+<style>
+td{
+  vertical-align: top;
+}
+</style>
+{% endblock style %}
+{% block konten %}
+{% if alert_account %}
+<script>alert('Akun Anda Memiliki Batasan')</script>
+{% endif %}
+{% if alert_jasa %}
+<script>alert('Satu Akun Satu Profile Jasa')</script>
+{% endif %}
+<div class="jumbotron jumbotron-fluid" style="margin: 10px; box-shadow: 7px 7px 20px; border-radius: 30px;" >
+  <div class="container">
+      <h1 class="display-4">hi Provider, {{ request.user }}</h1>
+      <p class="lead">Pengelolaan Sistem Informasi Jasa</p>
+  </div>
+</div>
+
+<div style="margin:10px;">
+    <table style="width: 100%; margin-bottom: 30px; box-shadow: 7px 7px 20px; border-radius: 30px; border:1px; " >
+        <tbody>
+        <tr>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+        </tr>
+        <tr>
+            <td>&nbsp;</td>
+            <td style="width:40%"><img src="{{gambar.profile_photo.url}}" style="width: 450px; height: 450px; text-align: right; border-radius: 50%; padding: 0px; -moz-box-shadow: 10px 10px 5px #ccc; -webkit-box-shadow: 10px 10px 5px #ccc; box-shadow: 10px 10px 5px #ccc; -moz-border-radius:25px; -webkit-border-radius:25px;" alt="img"></td>
+            <td>
+                <table style="width: 100%; height: 500px; text-align: left;" border="0">
+                    <tbody>
+                    <tr>
+                        <td colspan="4" style="height:10px;"><h4 class="mb-4">Data informasi</h4><hr></td><td>&nbsp;</td>
+                    </tr>
+                    <tr>
+                    <td colspan="4">
+                        {% for message in messages %}
+                        <div class="alert alert-{{ message.tags }} alert-dismissible" role="alert" >
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                        </button>
+                        {% if message.tags == "warning" %}
+                        {{ message }}<a href="{% url 'indexrule' %}" style="text-decoration: none;"> disini</a>
+                        {% else %}
+                        {{ message }}
+                        {% endif %}
+                        </div>
+                        {% endfor %}
+                    </td>
+                    <td>&nbsp;</td>
+                    </tr>                        
+                    <tr>
+                        <td style="width: 40%;">Nama Jasa</td>
+                        <td>:</td>
+                        <td>&nbsp;</td>
+                        <td> {{data.nama_jasa}}</td> 
+                        <td>&nbsp;</td>
+                    </tr>
+                    <tr>
+                        <td>Pemilik Jasa</td>
+                        <td>:</td>
+                        <td>&nbsp;</td>
+                        <td> {{data.pemilik_jasa}}</td>
+                        <td>&nbsp;</td>
+                    </tr>
+                    <tr>
+                        <td>Email Jasa</td>
+                        <td>:</td>
+                        <td>&nbsp;</td>
+                        <td> {{data.email_jasa}}</td>
+                        <td>&nbsp;</td>
+                    </tr>
+                    <tr>
+                        <td>No. Telepon</td>
+                        <td>:</td>
+                        <td>&nbsp;</td>
+                        <td> {{data.no_telp}}</td>
+                        <td>&nbsp;</td>
+                    </tr>
+                    <tr>
+                        <td>Alamat</td>
+                        <td>:   </td>
+                        <td>&nbsp;</td>
+                        <td> {{data.alamat}}, {{data.kecamatan}}, Kab. Pemalang</td>
+                        <td>&nbsp;</td>
+                    </tr>
+                    <tr>
+                        <td>Deskripsi</td>
+                        <td>:</td>
+                        <td>&nbsp;</td>
+                        <td> {{data.deskripsi_jasa|linebreaks}}</td>
+                        <td>&nbsp;</td>
+                    </tr>
+                    <tr>
+                        <td colspan="4"><a href="{% url 'provider:editbukajasa' %}" class="btn btn-primary btn-md " style="border-radius: 50px; margin-top:5px; " role="button" aria-pressed="true">Ubah Profil Jasa</a></td>
+                        <td>&nbsp;</td>
+                    </tr>
+                    </tbody>
+                </table>
+            </td>
+        </tr>
+        <tr>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+        </tr>
+        </tbody>
+    </table>
+    </div>
+{% endblock konten %}

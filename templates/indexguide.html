@@ -1,0 +1,95 @@
+{% extends "dasar.html" %}
+{% block nav %}
+{% include "snippets/nav3.html" %}
+{% endblock nav %}
+{% block konten %}
+<div class="container" style="margin-top:20px;">
+<h2 class="mb-4"><a href="{% url 'index' %} "><span class="fa fa-arrow-left"></span></a> {{header}}</h2><hr>
+<div class="content-section">
+<table style="margin-bottom: 20px;">
+<tbody>
+<tr>
+<td colspan="2"><h3>Registrasi</h3></td>
+<td></td>
+</tr>
+<tr>
+<td>1. Klik tombol registrasi pada halaman utama sistem.<br>
+2. Masukan biodata dengan benar dan pastikan nama pengguna belum terdaftar.<br>
+3. Pilih jenis akun yang akan digunakan.<br>
+4.pastikan kata sandi yang digunakan sesuai dengan ketentuan sistem.</td>
+<tr>
+<td colspan="2"><h3>Login</h3></td>
+<td></td>
+</tr>
+<tr>
+<td><p>1. Klik tombol login.<br>
+    2. Masukan username dan password yang anda miliki stelah melakukan registrasi sebelumnya.</p></td>
+</tr>
+<tr>
+<td colspan="2"><h3>Pemesanan jasa</h3></td>
+</tr>
+<tr>
+<td><p>1. pastikan anda sudah melakukan login akun customer.<br>
+    2. pastikan data pemesanan diisi dengan benar.<br>
+    3. tunggu status pemesanan.<br>
+    * Note jenis status :
+    pending  : pemesanan anda belum diterima atau ditolak.<br>
+    diterima : pemesanan anda diterima namun belum dikerjakan.<br>
+    ditolak  : pemesanan anda ditolak.<br>
+    diproses : pemesanan anda sedang dilakukan pengerjaan.<br>
+    selesai  : pemesanan anda sudah diselesaikan. proses selesai dilakukan oleh akun customer apabila pemesanan jasa sudah diselesaikan dikerjakan.<br>
+4. untuk transaksi pembayaran bisa dilakukan perudingan oleh customer dan provider via whastapp yang disediakan sistem.<br>
+5. anda dapat hapus pemesanan jasa apabila memiliki status pending atau selesai.</p>
+</td>
+</tr>
+<tr>
+<td colspan="2"><h3>Pengelolaan jasa</h3></td>
+</tr>
+<tr>
+<td>1. login akun provider.<br>
+    2. apabila anda posting jasa pastikan data yang dimasukan benar, masukan harga per datuan yang dimasukan.<br>
+    apabila data yang anda masukan salah bisa dilakukan perubahan pada tombol ubah, jika anda ingin menghentikan semtara salah satu jasa bisa menggunkan status sibuk.<br>
+    3. apabila anda ingin hapus jasa bisa tekan tombol hapus
+</td>
+</tr>
+<tr>
+<td colspan="2"><h3>Pengelolaan Pemesanan</h3></td>
+
+</tr>
+<tr>
+    <td>1. login akun provider.<br>
+        2. masuk ke halaman kelola pemesanan.<br>
+        3. apabila anda ingin menolak pemesanan bisa tekan tombol tolak, apabila anda ingin menerima pemesanan bisa tekan tombol terima, stelah dilakukan tombol terima anda dapat melakukan konfirmasi pengerjaan dengan tekan tombol proses. jika tombol proses tidak diilakukan dalam waktu 3 hari maka otomatis pemesana jasa berubah status menjadi tolak.<br>
+        yang dapat melakuakn proses selsai dilakukan oleh akun customer apabila merasa pekerjaan jasa sudah selesai.
+    </td>
+</tr>
+<tr>
+    <td colspan="2"><h3>Reset akun</h3></td>
+</tr>
+<tr>
+    <td>1. jika anda lupa kata sandi anda dapat melakuakn reset akun.<br>
+        2. masuk ke halam reset akun yang terdapat pada halam login.<br>
+        3. masukan alamat email anda saat awal melakukan registrasi.<br>
+        4. cek kontak pesan email pean dari sistem apabila tidak ditemukan cek pada bagian spam.<br>
+        5. klik link yang dikirim oleh sistem.<br>
+        6. maka akan dialihkan ke halaman membuat kata sandi baru dan pastikan memasukan kata sandi dengan ketentuan.
+    </td>
+</tr>
+<tr>
+    <td colspan="2"><h3>Lapor akun</h3></td>
+</tr>
+<tr>
+<td>1. sudah login sistem.<br>
+        2. masuk ke halaman lapor akun.<br>
+        3. masukan data laporan beserta foto bukti.<br>
+        4. admin akan melakukan konfirmasi terhadap akun yang dilaporkan.<br>
+    </td>
+</tr>
+
+</tbody>
+</table>
+<!-- DivTable.com -->
+
+    </div>
+</div>
+{% endblock konten %}

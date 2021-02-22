@@ -1,0 +1,78 @@
+{% extends "dasar.html" %}
+{% load humanize %}
+{% block nav %}
+{% include "snippets/navprovider.html" %}
+{% endblock nav %}
+{% block modaldelete %}
+{% include "snippets/modaldelete.html"%}
+{% include "snippets/modalrejected.html"%}
+{% include "snippets/modalreceived.html"%}
+{% include "snippets/modalprocessed.html"%}
+{% endblock modaldelete %}
+{% block konten %}
+<div style="margin: 20px;">
+<h2 class="mb-4">{{header}}</h2>
+<p>Kelola pemesanan jasa anda dengan benar</p>
+<div style="margin: 0px; box-shadow: 7px 7px 20px; border-radius: 20px;">
+<div style="margin : 20px;">
+<table id=""class="table" border="1" >
+  <thead class="thead-dark">
+    <tr>
+      <th scope="col">No.</th>
+      <th scope="col">Nama Pemesan</th>
+      <th scope="col">Jasa Pesanan</th>
+      <th scope="col">No. Telepon</th>
+
+      <th scope="col">Tanggal Dan Waktu Pesanan</th>
+      <th scope="col">Status</th>
+      <th scope="col">Aksi</th>
+    </tr>
+  </thead>
+  <tbody>
+  {% for a in data %}
+   <tr>
+      <th scope="row" >{{forloop.counter|add:0}}</th>
+
+      <td>{{a.nama_order}}</td>
+      <td>{{a.jasa_order.jasa}}</td>
+      <td>{{a.telp_order}}</td>
+      <td>{{a.tanggal_order|date:"j F Y, H:i"}}</td>
+      {% if a.status  == "Pending" %}
+      <td><a href="" class="btn btn-secondary btn-sm disabled " role="button" aria-pressed="true" style=" border-radius: 50px;">{{a.status}}</a></td>
+      {% elif a.status == "Diterima" %}
+      <td><a href="" class="btn btn-success btn-sm disabled " role="button" aria-pressed="true" style=" border-radius: 50px;">{{a.status}}</a></td>
+      {% elif a.status == "Diproses" %}
+      <td><a href="" class="btn btn-info btn-sm disabled " role="button" aria-pressed="true" style=" border-radius: 50px;">{{a.status}}</a></td>
+      {% elif a.status == "Selesai" %}
+      <td><a href="" class="btn btn-primary btn-sm disabled " role="button" aria-pressed="true" style=" border-radius: 50px;">{{a.status}}</a></td>
+      {% else %}
+      <td><a href="" class="btn btn-danger btn-sm disabled " role="button" aria-pressed="true" style=" border-radius: 50px;">{{a.status}}</a></td>
+      {% endif %}  
+    <td>
+    {% if a.status  == "Pending" %}
+    <a href="{% url 'provider:receivedorder' a.kode %}" style="border-radius: 50px;" class="confirm-received btn btn-success btn-sm" title="Received" data-toggle="modal" data-target="#confirmReceivedModal" id="receivedButton{{a.kode}}">Terima</a>
+    <a href="{% url 'provider:rejectedorder' a.kode %}" style="border-radius: 50px;" class="confirm-rejected btn btn-danger btn-sm" title="Rejected" data-toggle="modal" data-target="#confirmRejectedModal" id="rejectedButton{{a.kode}}">Tolak</a>
+    <a href="{% url 'provider:detailorder' a.kode %}" class="btn btn-warning btn-sm " role="button" aria-pressed="true" style=" border-radius: 50px;">Detail</a></td>
+    {% elif a.status == "Diterima" %}
+    <a href="{% url 'provider:processedorder' a.kode %}" style="border-radius: 50px;" class="confirm-processed btn btn-info btn-sm" title="Processed" data-toggle="modal" data-target="#confirmProcessedModal" id="processedButton{{a.kode}}">proses</a>
+    {% comment %} <a href="{% url 'provider:processorder' a.kode %}" style="border-radius: 50px;" class="confirm-process btn btn-info btn-sm" title="Process" data-toggle="modal" data-target="#confirmProcessModal" id="processButton{{a.kode}}">Proses</a> {% endcomment %}
+    <a href="{% url 'provider:detailorder' a.kode %}" class="btn btn-warning btn-sm " role="button" aria-pressed="true" style=" border-radius: 50px;">Detail</a>
+    {% elif a.status == "Ditolak" %}
+    <a href="{% url 'provider:detailorder' a.kode %}" class="btn btn-warning btn-sm " role="button" aria-pressed="true" style=" border-radius: 50px;">Detail</a></td>
+    {% elif a.status == "Diproses" %}
+    <a href="{% url 'provider:detailorder' a.kode %}" class="btn btn-warning btn-sm " role="button" aria-pressed="true" style=" border-radius: 50px;">Detail</a></td>
+    {% elif a.status == "Selesai" %}
+    <a href="{% url 'provider:detailorder' a.kode %}" class="btn btn-warning btn-sm " role="button" aria-pressed="true" style=" border-radius: 50px;">Detail</a>
+    <a href="{% url 'provider:deleteorder' a.kode %}" style="border-radius: 50px;" class="confirm-delete btn btn-danger btn-sm" title="Delete" data-toggle="modal" data-target="#confirmDeleteModal" id="deleteButton{{a.kode}}">Hapus</a>
+
+    {% else %}
+    {% endif %}
+    </tr>
+  {% endfor %}
+  </tbody>
+</table>
+</div>
+</div>
+</div>
+{% endblock konten %}
+

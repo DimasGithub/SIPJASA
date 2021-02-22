@@ -1,0 +1,52 @@
+{% extends "dasar.html" %}
+{% block nav %}
+{% include "snippets/nav.html" %}
+{% endblock nav %}
+{% block konten %}
+<div class="container" style="margin-top:20px;">
+    <h2 class="mb-4"><a href="{% url 'index' %} "><span class="fa fa-arrow-left"></span></a> {{header}}<hr></h2>
+<div class="content-section">
+<table style="font-size:18px;">
+<tbody>
+<tr>
+<td style="width:3%;">1.</td>
+<td>Pengguna sudah memahami panduan penggunaan sistem. dapat dibaca selengkapanya <a href="{% url 'indexguide' %}">disini</a>.</td>
+</tr>
+<tr>
+<td>2.</td>
+<td>Pengguna dilarang membuat data palsu dalam laporan akun dan bertanggung jawab atas laporan yang dibuat.</td>
+</tr>
+<tr>
+<td>3.</td>
+<td>Pengguna provider dilarang mempublikasi koten yang mengandung : Pornografi, SARA, penghinaan dan keasusilaan umum.</td>
+</tr>
+<tr>
+<td>4.</td>
+<td>Pengguna customer bertanggung jawab atas pemesanan jasa yang dipesan.</td>
+</tr>
+<tr>
+<td>5.</td>
+<td>Pengguna provider bertanggung jawab atas publikasi dan penerimaan, penolakan, dan konfirmasi proses pengerjaan jasa.</td>
+</tr>
+<tr>
+<td>6.</td>
+<td>Admin berhak melakukan banned terhadap akun yang melanggar dan tidak bertanggung jawab terhadap penggunaan sistem.</td>
+</tr>
+<tr>
+<td>7.</td>
+<td>Admin akan melakukan konfirmasi panggilan terhadap akun yang dilaporkan dalam waktu 3 hari dimulai hari saat dilaporkan.</td>
+</tr>
+<tr>
+<td>8.</td>
+<td>Pengelola sistem tidak bertanggung jawab bentuk pembayaran yang digunakan oleh kedua pihak.</td>
+</tr>
+<tr>
+<td></td>
+<td>note : pengguna yang sudah melakukan registrasi menyetujui aturan yang ada pada sistem.</td>
+</tr>
+</tbody>
+</table>
+<!-- DivTable.com -->
+</div>
+</div>
+{% endblock konten %}

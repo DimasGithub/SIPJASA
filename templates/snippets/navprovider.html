@@ -1,0 +1,41 @@
+<nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-primary">
+  <a class="navbar-brand" href="/">SIPJASA</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item ">
+        <a class="nav-link" href="{% url 'provider:bukajasa' %}">Buka Jasa</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="{% url 'provider:postingjasa' %}">Posting</a>
+      </li>
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          Kelola
+        </a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+          <a class="dropdown-item" href="{% url 'indexguide' %}">Panduan</a>
+          <a class="dropdown-item" href="{% url 'provider:manageposting' %}">Posting</a>
+          <a class="dropdown-item" href="{% url 'provider:manageorder' %}">Pemesanan</a>
+        </div>
+      </li> 
+    </ul>
+    <div class="navbar-nav ml-auto action-buttons">
+      <div class="btn-group dropleft">
+        <button type="button" class="btn btn-sm dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="background-color: transparent; color: white;">
+        Hi, {{user.username}}
+        </button>
+        <div class="dropdown-menu">
+          <a class="dropdown-item" href="{% url 'report:indexreport' %}">Lapor</a>
+          <a class="dropdown-item" href="{% url 'register:profilakun'%}">Profil</a>
+          <a class="dropdown-item" href="{% url 'provider:logout' %}">Keluar</a>
+        </div>
+      <img src="{{user.userprofile.profile_photo.url}}" style="width: 40px; height: 40px; margin-left: 3px; border-radius: 50%;" alt="img">
+      </div>
+    </div>
+
+  </div>
+</nav>

@@ -1,0 +1,73 @@
+{% extends "dasar.html" %} 
+{% block nav %}
+{% include "snippets/navadmin.html" %}
+{% endblock nav %}
+{% block modaldelete %}
+{% include "snippets/modalbanned.html" %}
+{% include "snippets/modaldelete.html" %}
+{% endblock modaldelete %}
+{% block konten %}
+{% if alert_account %}
+<script>alert('Akun Anda Memiliki Batasan')</script>
+{% endif %}
+<div class="jumbotron jumbotron-fluid" style="margin: 10px; box-shadow: 7px 7px 20px; border-radius: 30px;" >
+  <div class="container">
+      <h1 class="display-4">hi, {{ user.username }}</h1>
+      <p class="lead">Monitoring User And Report</p>
+  </div>
+</div>
+<div style="margin: 20px;">
+<h2 class="mb-4">{{header}}</h2>
+<div style= " margin : 10 px; box-shadow: 7px 7px 20px; border-radius: 20px;">
+<div style="margin : 20px;">
+<table id="" class="table" border="1" >
+  <thead class="thead-dark">
+    <tr>
+      <th scope="col">Id</th>
+      <th scope="col">Username</th>
+      <th scope="col">Full Name</th>
+      <th scope="col">Email</th>
+      <th scope="col">Date Join</th>
+      <th scope="col">Last Login</th>
+      <th scope="col">Status</th>
+      <th scope="col">Action</th>
+    </tr>
+  </thead>
+  <tbody>
+{% for a in data %}
+{% for b in a.groups.all %}
+   <tr>
+      <th scope="row" >{{a.id}}</th>
+      <td>{{a.username}}</td>
+      <td>{{a.first_name}} {{a.last_name}}</td>
+      <td>{{a.email}}</td>
+      <td>{{a.date_joined|date:"j F Y, H:i"}}</td>
+      <td>{{a.last_login|date:"j F Y, H:i"}}</td>
+      {% if b.name == "Customer" %}
+      <td><a href="" class="btn btn-primary btn-sm disabled " role="button" aria-pressed="true" style=" border-radius: 50px;">{{b.name}}</a></td>
+      {% elif b.name == "Admin" %}
+      <td><a href="" class="btn btn-success btn-sm disabled " role="button" aria-pressed="true" style=" border-radius: 50px;">{{b.name}}</a></td>
+      {% elif b.name == "Provider" %}
+      <td><a href="" class="btn btn-info btn-sm disabled " role="button" aria-pressed="true" style=" border-radius: 50px;">{{b.name}}</a></td>
+      {% elif b.name == "Banned" %}
+      <td><a href="" class="btn btn-danger btn-sm disabled " role="button" aria-pressed="true" style=" border-radius: 50px;">{{b.name}}</a></td>
+      {% else %}
+      <td><a href="" class="btn btn-secodary btn-sm disabled " role="button" aria-pressed="true" style=" border-radius: 50px;">Unknow</a></td>
+      {% endif %}
+      
+      {% if b.name == "Banned" or b.name == "Admin" %}
+      <td>&nbsp;</td>
+      {% else %}
+      <td>
+      <a href="{% url 'administrator:accountbanned' a.id %}" style="border-radius: 50px;" class="confirm-banned btn btn-danger btn-sm" title="Banned" data-toggle="modal" data-target="#confirmBannedModal" id="bannedButton{{a.id}}">Banned</a>
+      </td>
+      {% endif %}
+    </tr>
+{% endfor %} 
+{% endfor %}
+</tbody>
+</table>
+</div>
+</div>
+</div>
+{% endblock konten %}

@@ -1,0 +1,99 @@
+{% extends "dasar.html" %}
+{% load humanize %}
+{% block nav %}
+{% include "snippets/nav2.html" %}
+{% endblock nav %}
+{% if notif %}
+<script>alert('hi '+request.user+' Anda berhasil login')</script>
+{% endif %}
+{% block konten %}
+
+<div class="jumbotron jumbotron-fluid" style="margin: 10px; box-shadow: 7px 7px 20px; border-radius: 30px;" >
+  <div class="container">
+    {% if user.is_authenticated %}
+      <h1 class="display-4">hi, {{ user.username }}</h1>
+      <p class="lead">Cari Jasa Di Kabupaten Pemalang Dengan Mudah.</p>
+    {% else %}
+      <h1 class="display-4">Selamat datang</h1>
+      <p class="lead">Website Sistem Informasi Jasa Wilayah Kabupaten Pemalang</p>
+    {% endif %}
+  </div>
+</div>
+<div class="d-flex justify-content-around">
+<a href="{% url 'indexkategori' 'Pendidikan'%}" class="btn btn-primary" style="border-radius: 50px; margin: 10px; width : 20%;">Pendidikan</a>
+<a href="{% url 'indexkategori' 'Desain'%}" class="btn btn-primary" style="border-radius: 50px; margin: 10px; width : 20%;">Desain</a>
+<a href="{% url 'indexkategori' 'Teknologi'%}" class="btn btn-primary" style="border-radius: 50px; margin: 10px; width : 20%;">Teknologi</a>
+<a href="{% url 'indexkategori' 'Transportasi'%}" class="btn btn-primary" style="border-radius: 50px; margin: 10px; width : 20%;">Transportasi</a>
+<a href="{% url 'indexkategori' 'Usaha Rumah Tangga'%}" class="btn btn-primary" style="border-radius: 50px; margin: 10px; width : 20%;">Usaha Rumah Tangga</a>
+</div>
+{% for message in messages %}
+<div class="alert alert-{{ message.tags }}  alert-dismissible" role="alert" style="margin: 10px;">
+<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+<span aria-hidden="true">&times;</span>
+</button>
+hi, {{request.user}}{{ message }} <a href="{% url 'indexrule' %}" style="text-decoration: none;"></a>
+</div>
+{% endfor %}
+<div style="margin: 10px; box-shadow: 7px 7px 20px; border-radius: 30px;">
+<div class="container" style="margin: 0 auto; margin-buttom:10px;">
+<div class="row text-left">
+{% for a in page_obj %}
+  <div class="col-md-3" style="margin-top: 10px; margin-buttom:10px;" >
+    <div class="card h-100">
+      <img class="card-img-top" src="{{a.upload_foto.url}}" width = "300" height = "150" alt="IMG">
+      <div class="card-body">
+        <h4 class="card-title" ><a href="{% url 'order:details' a.id %}" style="text-decoration: none;">{{a.jasa}}</a></h4>
+        <p class="card-text" style="color:#f1c40f" >Rp. {{a.harga_jasa|intcomma}} / {{a.satuan_jasa}}</p>
+        <p class="card-text"><a href="" class="btn btn-primary btn-sm disabled " role="button" aria-pressed="true" style=" border-radius: 50px;">{{a.jenis_jasa}}</a></p>
+        <p class="card-text">{{a.nama_jasa.kecamatan}}</p>
+        <p class="card-text">Owner : <a href="{% url 'order:indexdetailsjasa' a.id %}" style="text-decoration: none;">{{a.nama_jasa.nama_jasa}}</a></p>
+      </div>
+      <div class="card-footer text-center">
+        <a href="https://wa.me/62{{a.nama_jasa.no_telp|slice:"1:"}}" class="btn " style="border-radius: 50px; background-color: #4ed433; color: white;">Whatsapp</a>
+        <a href="{% url 'order:details' a.id %}" class="btn btn-primary" style="border-radius: 50px;">Detail</a>
+      </div>
+    </div>
+  </div>
+{% endfor %}
+</div>
+</div>
+</div> 
+
+    <nav aria-label="Page navigation example" style="margin-top:10px;" >
+      <ul class="pagination justify-content-center">
+        {% if page_obj.has_previous %}
+          <li class="page-item">
+            <a class="page-link" href="?page={{ page_obj.previous_page_number }}">Previous</a>
+          </li>
+        {% else %}
+          <li class="page-item disabled">
+            <a class="page-link" href="#" tabindex="-1" aria-disabled="true">Previous</a>
+          </li>
+        {% endif %}
+        {% for i in page_obj.paginator.page_range %}
+          {% if page_obj.number == i %}
+            <li class="page-item active" aria-current="page">
+              <span class="page-link">
+                {{ i }}
+                <span class="sr-only">(current)</span>
+              </span>
+            </li>
+          {% else %}
+            <li class="page-item"><a class="page-link" href="?page={{ i }}">{{ i }}</a></li>
+          {% endif %}
+        {% endfor %}
+        {% if page_obj.has_next %}
+          <li class="page-item">
+            <a class="page-link" href="?page={{ page_obj.next_page_number }}">Next</a>
+          </li>
+        {% else %}
+          <li class="page-item disabled">
+            <a class="page-link" href="#" tabindex="-1" aria-disabled="true">Next</a>
+          </li>
+        {% endif %}
+      </ul>
+    </nav>
+
+{% endblock konten %}
+
+

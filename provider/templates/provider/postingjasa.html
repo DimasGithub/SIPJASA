@@ -1,0 +1,80 @@
+{% extends "dasar.html" %}
+{% load crispy_forms_tags %}
+{% block style %}
+<style>
+td{
+  vertical-align: top;
+}
+</style>
+{% endblock style %}
+{% block nav %}
+{% include "snippets/navprovider.html" %}
+{% endblock nav %}
+{% block konten %}
+<div style="margin: 20px;">
+<h2 class="mb-4">{{header}}</h2>
+<p>Posting jasa anda dengan sesuai dengan kemampuan</p>
+<form method="POST" enctype="multipart/form-data" novalidate>
+{% csrf_token %}
+                <table style= "height: 700px; width: 100%; margin-bottom: 30px; box-shadow: 7px 7px 20px; border-radius: 30px;" border="0">
+                        <tbody>
+                        <tr>
+                        <td>&nbsp;</td>
+                        <td colspan="4"><h4 class="mb-4" style="margin-top:10px;">Masukan data jasa atau kemampuan</h4><hr></td>
+                        <tr>
+                        <td>&nbsp;</td>
+                        <td>{{forms.jasa.label}}</td>
+                        <td>:</td>
+                        <td>{{forms.jasa|as_crispy_field}}</td>
+                        <td>&nbsp;</td>
+                        </tr>
+                        <tr>
+                        <td>&nbsp;</td>
+                        <td>{{forms.harga_jasa.label}}</td>
+                        <td>:</td>
+                        <td>{{forms.harga_jasa|as_crispy_field}}</td>
+                        <td>&nbsp;</td>
+                        </tr>
+                        <tr>
+                        <td>&nbsp;</td>
+                        <td>{{forms.satuan_jasa.label}}</td>
+                        <td>:</td>
+                        <td>{{forms.satuan_jasa|as_crispy_field}}</td>
+                        <td>&nbsp;</td>
+                        </tr>
+                        <td>&nbsp;</td>
+                        <td>{{forms.jenis_jasa.label}}</td>
+                        <td>:</td>
+                        <td>{{forms.jenis_jasa|as_crispy_field}}</td>
+                        <td>&nbsp;</td>
+                        </tr>
+                        <tr>
+                        <td>&nbsp;</td>
+                        <td>{{forms.status_jasa.label}}</td>
+                        <td>:</td>
+                        <td>{{forms.status_jasa|as_crispy_field}}</td>
+                        <td>&nbsp;</td>
+                        </tr>
+                        <tr>
+                        <td>&nbsp;</td>
+                        <td>{{forms.keterangan.label}}</td>
+                        <td>:</td>
+                        <td>{{forms.keterangan|as_crispy_field}}</td>
+                        <td>&nbsp;</td>
+                        </tr>
+                        <tr>
+                        <td>&nbsp;</td>
+                        <td>{{forms.upload_foto.label}}</td>
+                        <td>:</td>
+                        <td>{{forms.upload_foto|as_crispy_field}}</td>
+                        <td>&nbsp;</td>
+                        </tr>
+                        <tr>
+                        <td>&nbsp;</td>
+                        <td colspan="4"> <button type="submit" class="btn btn-md btn-primary" style="margin-right: 10px; margin-bottom: 20px; border-radius: 50px;">Submit</button></td>
+                        </tr>
+                        </tbody>
+                </table>
+</form>
+</div>
+{% endblock konten %}

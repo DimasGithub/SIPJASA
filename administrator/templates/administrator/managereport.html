@@ -1,0 +1,75 @@
+{% extends "dasar.html" %} 
+{% block nav %}
+{% include "snippets/navadmin.html" %}
+{% endblock nav %}
+{% block modaldelete %}
+{% include "snippets/modalterimareport.html" %}
+{% include "snippets/modaltolakreport.html" %}
+{% include "snippets/modaldelete.html" %}
+{% endblock modaldelete %}
+{% block konten %}
+{% if alert_account %}
+<script>alert('Akun Anda Memiliki Batasan')</script>
+{% endif %}
+<div class="jumbotron jumbotron-fluid" style="margin: 10px; box-shadow: 7px 7px 20px; border-radius: 30px;" >
+  <div class="container">
+      <h1 class="display-4">hi, {{ user.username }}</h1>
+      <p class="lead">Monitoring User And Report</p>
+  </div>
+</div>
+
+<div style="margin: 20px;">
+<h2 class="mb-4">{{header}}</h2>
+<div style= " margin : 10 px; box-shadow: 7px 7px 20px; border-radius: 20px;">
+<div style="margin : 20px;">
+<table id="" class="table" border="1" >
+  <thead class="thead-dark">
+    <tr>
+      <th scope="col">No.</th>
+      <th scope="col">Account Reporting</th>
+      <th scope="col">Account Reported</th>
+      <th scope="col">Order Code</th>
+      <th scope="col">Date Time Report</th>
+      <th scope="col">Noted Report</th>
+      <th scope="col">Status Report</th>
+      <th scope="col">Evidence file</th>
+      <th scope="col">Action</th>
+    </tr>
+  </thead>
+  <tbody>
+  {% for a in data %}
+   <tr>
+      <th scope="row" >{{forloop.counter|add:0}}</th>
+      <td >{{a.akun_reporting}}</td>
+      <td>{{a.akun_reported}}</td>
+      <td>{{a.kodeorder_report}}</td>
+      <td>{{a.datetime_report|date:"j F Y, H:i"}}</td>
+      <td>{{a.noted_report}}</td>
+      {% if a.status_report  == "Pending" %}
+      <td><a href="" class="btn btn-secondary btn-sm disabled " role="button" aria-pressed="true" style=" border-radius: 50px;">{{a.status_report}}</a></td>
+      {% elif a.status_report == "Terima" %}
+      <td><a href="" class="btn btn-success btn-sm disabled " role="button" aria-pressed="true" style=" border-radius: 50px;">{{a.status_report}}</a></td>
+      {% else %}
+      <td><a href="" class="btn btn-danger btn-sm disabled " role="button" aria-pressed="true" style=" border-radius: 50px;">{{a.status_report}}</a></td>
+      {% endif %}
+      <td><a href="{{a.upload_foto.url}}" class="btn btn-info btn-sm" style="border-radius: 50px;" role="button" target="_blank" >Cek</a></td>
+      {% if a.status_report == "Pending"%}
+      
+    
+      <td><a href="https://wa.me/62{{a.telp_reported|slice:"1:"}}" class="btn btn-sm" style="border-radius: 50px; background-color: #4ed433; color: white;">Whatsapp</a><a href="{% url 'administrator:receivedreport' a.ids%}" style="border-radius: 50px;" class="confirm-received btn btn-success btn-sm" title="Received" data-toggle="modal" data-target="#confirmReceivedModal" id="receivedButton{{a.kode}}">Terima</a><a href="{% url 'administrator:rejectedreport' a.ids%}" style="border-radius: 50px;" class="confirm-rejected btn btn-danger btn-sm" title="Rejected" data-toggle="modal" data-target="#confirmRejectedModal" id="rejectedButton{{a.kode}}">Tolak</a></td>
+      {% elif a.status_report == "Terima"%}
+      <td><a href="{% url 'administrator:deletereport' a.ids %}" style="border-radius: 50px;" class="confirm-delete btn btn-danger btn-sm" title="Delete" data-toggle="modal" data-target="#confirmDeleteModal" id="deleteButton{{a.ids}}">Hapus</a></td>
+      {% elif a.status_report == "Tolak"%}
+      <td><a href="{% url 'administrator:deletereport' a.ids %}" style="border-radius: 50px;" class="confirm-delete btn btn-danger btn-sm" title="Delete" data-toggle="modal" data-target="#confirmDeleteModal" id="deleteButton{{a.ids}}">Hapus</a></td>
+      {% elif a.status_report == "Tidak valid" %}
+      <td><a href="{% url 'administrator:deletereport' a.ids %}" style="border-radius: 50px;" class="confirm-delete btn btn-danger btn-sm" title="Delete" data-toggle="modal" data-target="#confirmDeleteModal" id="deleteButton{{a.ids}}">Hapus</a></td>
+
+      {% endif %}
+    </tr>
+  {% endfor %}
+  </tbody>
+</table>
+</div>
+</div>
+</div>
+{% endblock konten %}

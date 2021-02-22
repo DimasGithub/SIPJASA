@@ -1,0 +1,55 @@
+{% extends "dasar.html" %}
+{% load humanize %}
+{% load crispy_forms_tags %}
+{% block nav %}
+{% include "snippets/nav3.html" %}
+{% endblock nav %}
+{% block konten %}
+<div style="margin: 20px;">
+<h2 class="mb-4"><a href="{% url 'provider:manageorder' %} "><span class="fa fa-arrow-left"></span></a> {{header}}</h2>
+<p>Gunakan Fitur Report Akun Dengan Bijak</p>
+<form method="POST" enctype="multipart/form-data" novalidate>
+{% csrf_token %}
+<table style= "height: 550px; width: 100%; margin-bottom: 30px; box-shadow: 7px 7px 20px; border-radius: 30px;" border="0" >
+    <tbody>
+    <tr>
+    <td>&nbsp;</td>
+    <td colspan="4"><h4 class="mb-4" style="margin-top:5px;">Masukan Data Report Dengan Valid</h4><hr></td>
+    <tr>
+    <td>&nbsp;</td>
+    <td>Akun Dilaporkan</td>
+    <td>:</td>
+    <td>{{forms.akun_reported|as_crispy_field}}</td>
+    <td>&nbsp;</td>
+    </tr>
+    <tr>
+    <td>&nbsp;</td>
+    <td>Kode Order</td>
+    <td>:</td>
+    <td>{{forms.kodeorder_report|as_crispy_field}}</td>
+    <td>&nbsp;</td>
+    </tr>
+    <tr>
+    <td>&nbsp;</td>
+    <td>Catatan Laporan</td>
+    <td>:</td>
+    <td>{{forms.noted_report|as_crispy_field}}</td>
+    <td>&nbsp;</td>
+    </tr>
+    <td>&nbsp;</td>
+    <td>Upload Bukti Laporan</td>
+    <td>:</td>
+    <td>{{forms.upload_foto|as_crispy_field}}</td>
+    <td>&nbsp;</td>
+    </tr>
+    <tr>
+    <td>&nbsp;</td>
+    <td colspan="4"> <button type="submit" class="btn btn-md btn-primary" style="margin-right: 10px; margin-bottom: 20px; border-radius: 50px;">Submit</button></td>
+    </tr>
+    </tbody>
+    </table>
+</form>
+{% endblock konten %}
+
+
+

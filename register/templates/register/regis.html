@@ -1,0 +1,184 @@
+{% extends "dasar.html" %}
+{% load crispy_forms_tags %}
+{% block nav %}
+{% include "snippets/nav.html" %}
+{% endblock nav %}
+{% block style %}
+<style>
+td{
+  vertical-align: top;
+}
+</style>
+{% endblock style %}
+{% block konten %}
+{% for message in messages %}
+<div class="alert alert-{{ message.tags }}  alert-dismissible" role="alert" style="margin: 10px;">
+<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+<span aria-hidden="true">&times;</span>
+</button>
+{{ message }} <a href="{% url 'indexrule' %}" style="text-decoration: none;">disini</a>
+</div>
+{% endfor %} 
+<div style="margin: 20px;">
+
+<h2 class="mb-4" ><a href="{% url 'index' %} "><span class="fa fa-arrow-left"></span></a> {{header}}</h2>
+<p>Isikan biodata anda dengan lengkap</p>
+<form method="POST" enctype="multipart/form-data" novalidate>
+{% csrf_token %}
+                <table style= "height: 700px; width: 100%; margin-bottom: 30px; box-shadow: 7px 7px 20px; border-radius: 30px;" border="0">
+                        <tbody>
+                        <tr>
+                        <td>&nbsp;</td>
+                        <td colspan="4"><h4 class="mb-4" style="margin-top:10px;">Masukan Biodata</h4><hr></td>
+                        <tr>
+                        <td>&nbsp;</td>
+                        <td style="width:30%;">Nama Awal</td>
+                        <td>:</td>
+                        <td>{{forms.first_name|as_crispy_field}}</td>
+                        <td>&nbsp;</td>
+                        </tr>
+                        <tr>
+                        <td>&nbsp;</td>
+                        <td>Nama Akhir</td>
+                        <td>:</td>
+                        <td>{{forms.last_name|as_crispy_field}}</td>
+                        <td>&nbsp;</td>
+                        </tr>
+                        <tr>
+                        <td>&nbsp;</td>
+                        <td>Email</td>
+                        <td>:</td>
+                        <td>{{forms.email|as_crispy_field}}</td>
+                        <td>&nbsp;</td>
+                        </tr>
+                        <tr>
+                        <td>&nbsp;</td>
+                        <td>Kata Sandi</td>
+                        <td>:</td>
+                        <td>{{forms.password1|as_crispy_field}}</td>
+                        <td>&nbsp;</td>
+                        </tr>
+                        <tr>
+                        <td>&nbsp;</td>
+                        <td>Kata Sandi Konfirmasi</td>
+                        <td>:</td>
+                        <td>{{forms.password2|as_crispy_field}}</td>
+                        <td>&nbsp;</td>
+                        </tr>
+                        <tr>
+                        <td>&nbsp;</td>
+                        <td>Nama Pengguna</td>
+                        <td>:</td>
+                        <td>{{forms.username|as_crispy_field}}</td>
+                        <td>&nbsp;</td>
+                        </tr>
+                        <tr>
+                        <td>&nbsp;</td>
+                        <td>Tanggal Lahir</td>
+                        <td>:</td>
+                        <td>{{profile_forms.dob|as_crispy_field}}</td>
+                        <td>&nbsp;</td>
+                        </tr>
+                        <tr>
+                        <td>&nbsp;</td>
+                        <td>Jenis Kelamin</td>
+                        <td>:</td>
+                        <td>{{profile_forms.gender|as_crispy_field}}</td>
+                        <td>&nbsp;</td>
+                        </tr>
+                        <tr>
+                        <td>&nbsp;</td>
+                        <td>Status</td>
+                        <td>:</td>
+                        <td>{{profile_forms.status|as_crispy_field}}</td>
+                        <td>&nbsp;</td>
+                        </tr>
+                        <tr>
+                        <td>&nbsp;</td>
+                        <td>Unggah Foto</td>
+                        <td>:</td>
+                        <td>{{profile_forms.profile_photo|as_crispy_field}}</td>
+                        <td>&nbsp;</td>
+                        </tr>
+                        <td>&nbsp;</td>
+                        <td colspan="4"> <button type="submit" class="btn btn-md btn-primary" style="margin-right: 10px; margin-bottom: 20px; border-radius: 20px; ">Submit</button></td>
+                        </tr>
+                        </tbody>
+                </table>
+</form>
+</div>
+{% comment %} <div class="container" style="margin-top: 20px;">
+<h2 class="mb-4">{{header}}</h2>
+<p>Isikan biodata anda dengan lengkap</p>
+<form method="POST" enctype="multipart/form-data" >
+{% csrf_token %}
+        <div class="form-group row">
+        <label class="col-sm-2 col-form-label" >{{forms.first_name.label}}</label>
+        <div class="col-sm-10">
+        {{forms.first_name.error_messages}}
+        {{forms.first_name}}
+        </div>
+        </div>
+        <div class="form-group row">
+        <label class="col-sm-2 col-form-label" >{{forms.last_name.label}}</label>
+        <div class="col-sm-10">
+        {{forms.last_name}}
+        </div>
+        </div>
+        <div class="form-group row">
+        <label class="col-sm-2 col-form-label" >{{forms.email.label}}</label>
+        <div class="col-sm-10">
+        {{forms.email.errors}}
+        {{forms.email}}
+        </div>
+        </div>
+        <div class="form-group row">
+        <label class="col-sm-2 col-form-label" >{{forms.password1.label}}</label>
+        <div class="col-sm-10">
+        {{forms.password1.errors}}
+        {{forms.password1}}
+        </div>
+        </div>
+        <div class="form-group row">
+        <label class="col-sm-2 col-form-label" >{{forms.password2.label}}</label>
+        <div class="col-sm-10">
+        {{forms.password2.errors}}
+        {{forms.password2}}
+        </div>
+        </div>
+        <div class="form-group row">
+        <label class="col-sm-2 col-form-label" >{{forms.username.label}}</label>
+        <div class="col-sm-10">
+        {{forms.username}}
+        </div>
+        </div>
+        <div class="form-group row">
+        <label class="col-sm-2 col-form-label" >{{profile_forms.dob.label}}</label>
+        <div class="col-sm-10">
+        {{profile_forms.dob}}
+        </div>
+        </div>
+        <div class="form-group row">
+        <label class="col-sm-2 col-form-label" >{{profile_forms.gender.label}}</label>
+        <div class="col-sm-10">
+        {{profile_forms.gender}}
+        </div>
+        </div>
+        <div class="form-group row">
+        <label class="col-sm-2 col-form-label" >{{profile_forms.status.label}}</label>
+        <div class="col-sm-10">
+        {{profile_forms.status}}
+        </div>
+        </div>
+        <div class="form-group row">
+        <label class="col-sm-2 col-form-label" >{{profile_forms.profile_photo.label}}</label>
+        <div class="col-sm-10">
+        {{profile_forms.profile_photo}}
+        </div>
+        </div>
+        <button type="submit" class="btn btn-md" style="margin-right: 10px; margin-bottom: 50px; border-radius: 50px; background-color: #f1c40f; color: white;">Submit</button>
+</form>
+</div> {% endcomment %}
+{% endblock konten %}
+
+

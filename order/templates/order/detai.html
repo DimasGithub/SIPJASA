@@ -1,0 +1,186 @@
+{% extends "dasar.html" %}
+{% load humanize %}
+{% load crispy_forms_tags %}
+{% block style %}
+<style>
+td{
+  vertical-align: top;
+}
+</style>
+{% endblock style %}
+{% block nav %}
+{% include "snippets/nav.html" %}
+{% endblock nav %}
+{% block konten %}
+<div style="margin:20px;">
+    <h2 class="mb-4"><a href="{% url 'index' %} "><span class="fa fa-arrow-left"></span></a> {{header}}</h2>
+    <table style="width: 100%; margin-bottom: 30px; box-shadow: 7px 7px 20px; border-radius: 30px; border:1px;" >
+        <tbody>
+        <tr>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+        </tr>
+        <tr>
+            <td>&nbsp;</td>
+            <td style="width:40%"><img src="{{data.upload_foto.url}}" style="width: 450px; height: 500px; text-align: right; border-radius: 50px; padding: 0px; -moz-box-shadow: 10px 10px 5px #ccc; -webkit-box-shadow: 10px 10px 5px #ccc; box-shadow: 10px 10px 5px #ccc; -moz-border-radius:25px; -webkit-border-radius:25px;" alt="img"></td>
+            <td>
+                <table style="width: 100%; height: 500px; text-align: left;" border="0">
+                    <tbody>
+                    <tr>
+                        <td colspan="3" style="height:10px;"><h4 class="mb-4">Data Informasi Jasa {{data.nama_jasa.nama_jasa}}</h4><hr></td>
+                    </tr>                        
+                    <tr>
+                        <td style="width: 40%;">Jasa</td>
+                        <td>:</td>
+                        <td>{{data.jasa}}</td> 
+                    </tr>
+                    <tr>
+                        <td>Harga Jasa</td>
+                        <td>:</td>
+                        <td>RP. {{data.harga_jasa|intcomma}} / {{data.satuan_jasa}}</td>
+                    </tr>
+                    <tr>
+                        <td>Jenis Jasa</td>
+                        <td>:</td>
+                        <td>{{data.jenis_jasa}}</td>
+                    </tr>
+                    <tr>
+                        <td>Status Jasa</td>
+                        <td>:</td>
+                        {% if data.status_jasa == "Ada"%}
+                        <td><a href="" class="btn btn-success btn-sm disabled " role="button" aria-pressed="true" style=" border-radius: 50px;">{{data.status_jasa}}</a></td>
+                        {% else %}
+                        <td><a href="" class="btn btn-secondary btn-sm disabled " role="button" aria-pressed="true" style=" border-radius: 50px;">{{data.status_jasa}}</a></td>
+                        {% endif %}
+                    </tr>
+                    <tr>
+                        <td>Akun Pemilik Jasa</td>
+                        <td>:</td>
+                        <td>{{data.nama_jasa.user}}</td>
+                    </tr>
+                    <tr>
+                        <td>Pemilik Jasa</td>
+                        <td>:</td>
+                        <td>{{data.nama_jasa.nama_jasa}}</td>
+                    </tr>
+                    <tr>
+                        <td>Nomer Telepon</td>
+                        <td>:</td>
+                        <td>{{data.nama_jasa.no_telp}}</td>
+                    </tr>
+                    <tr>
+                        <td>Kecamatan</td>
+                        <td>:</td>
+                        <td>{{data.nama_jasa.kecamatan}}</td>
+                    </tr>
+                    <tr>
+                        <td>Alamat</td>
+                        <td>:</td>
+                        <td>{{data.nama_jasa.alamat}}</td>
+                    </tr>
+                    <tr>
+                        <td>Keterangan</td>
+                        <td>:</td>
+                        <td>{{data.keterangan}}</td>
+                    </tr>
+                    <tr>
+                        <td colspan="4"><a href="https://wa.me/62{{data.nama_jasa.no_telp|slice:"1:"}}" class="btn " style="border-radius: 50px; background-color: #4ed433; color: white;">Whatsapp</a></td>
+                    </tr>
+                    </tbody>
+                </table>
+            </td>
+        </tr>
+        <tr>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+        </tr>
+        </tbody>
+    </table>
+    <form method="POST" enctype="multipart/form-data">
+    {% csrf_token %}
+    <h2 class="mb-4">Pemesanan Jasa</h2>
+    <table style="height: 500px; width: 100%; margin-bottom: 30px; box-shadow: 7px 7px 20px; border-radius: 30px; " border="0">
+        <tbody>
+        <tr> 
+            <td>&nbsp;</td>
+            <td colspan="5" style="height: 10px;"><h4 class="mb-4" style="margin-top:20px;">Isikan Data Pemesanan Anda Dengan Benar</h4><hr></td>
+        </tr>    
+        <tr>
+            <td>&nbsp;</td>
+            <td style="width: 30%;">Nama Pemesan Jasa</td>
+            <td>:</td>
+            <td><input type="text" name="nama_order" class="form-control" placeholder="Nama Jasa" style="border-radius:20px;" maxlength="50"></td>
+            <td>&nbsp;</td>
+        </tr>
+        <tr>
+            <td>&nbsp;</td>
+            <td style="width: 30%;">No. Telepon</td>
+            <td>:</td>
+            <td><input type="text" name="telp_order" class="form-control" placeholder="Nomer Telepon Aktif" style="border-radius:20px;" maxlength="50"></td>
+            <td>&nbsp;</td>
+        </tr>
+        <tr>
+            <td>&nbsp;</td>
+            <td>Jumlah Order</td>
+            <td>:</td>
+            <td><input type="number" name="jumlah_order" class="form-control" placeholder="Jumlah Order" style="border-radius:20px;" maxlength="50"></td>
+            <td>&nbsp;</td>
+        </tr>
+        <tr>
+            <td>&nbsp;</td>
+            <td>Kecamatan</td>
+            <td>:</td>
+            <td><select name="kecamatan_order" class="form-control" placeholder="Kecamatan" style="border-radius:20px;" id="id_kecamatan">
+                <option value="Bodeh">Bodeh</option>
+                <option value="Petarukan">Petarukan</option>
+                <option value="Taman">Taman</option>
+                <option value="Randudongkal">Randudongkal</option>
+                <option value="Ulujami">Ulujami</option>
+                <option value="Bantarbolang">Bantarbolang</option>
+                <option value="Comal">Comal</option>
+                <option value="Ampelgading">Ampelgading</option>
+                <option value="Watukumpul">Watukumpul</option>
+                <option value="Pemalang">Pemalang</option>
+                <option value="Belik">Belik</option>
+                <option value="Pulosari">Pulosari</option>
+                <option value="Moga">Moga</option>
+                <option value="Warungpring">Warungpring</option>
+                </select>
+            </td>
+            <td>&nbsp;</td>
+        </tr>
+        <tr>
+            <td>&nbsp;</td>
+            <td>Alamat Pemesan</td>
+            <td>:</td>
+            <td><textarea name="alamat_order" style="border-radius:20px; width: 100%;" class="form-control" placeholder="Alamat Pemesan"></textarea></td>
+            <td>&nbsp;</td>
+        </tr>
+        <tr>
+            <td>&nbsp;</td>
+            <td>Catatan Pemesanan</td>
+            <td>:</td>
+            <td><textarea name="catatan_order" style="border-radius:20px; width: 100%;" class="form-control" placeholder="Catatan Pemesanan"></textarea></td>
+            <td>&nbsp;</td>
+        </tr>
+        <tr>
+            <td>&nbsp;</td>
+            <td><button type="submit" class="btn btn-md btn-primary" style="margin-right: 10px; margin-bottom: px; border-radius: 50px; ">Pesan</button></td>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+        </tr>
+        <tr>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+        </tr>        
+        </tbody>
+        </table>
+    </form>
+</div>
+{% endblock konten %}

@@ -1,0 +1,222 @@
+{% extends "dasar.html" %}
+{% load humanize %}
+{% load static %}
+{% load crispy_forms_tags %}
+{% block style %}
+<style>
+td{
+  vertical-align: top;
+}
+</style>
+{% endblock style %}
+{% block nav %}
+{% include "snippets/nav.html" %}
+{% endblock nav %}
+{% block konten %}
+<div style="margin:20px;">
+    <h2 class="mb-4"><a href="{% url 'index' %} "><span class="fa fa-arrow-left"></span></a> {{header}}</h2>
+    <table style="width: 100%; margin-bottom: 30px; box-shadow: 7px 7px 20px; border-radius: 30px; border:1px;" >
+        <tbody>
+        <tr>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+        </tr>
+        <tr>
+            <td>&nbsp;</td>
+            <td style="width:40%"><img src="{{data.upload_foto.url}}" style="width: 450px; height: 500px; text-align: right; border-radius: 50px; padding: 0px; -moz-box-shadow: 10px 10px 5px #ccc; -webkit-box-shadow: 10px 10px 5px #ccc; box-shadow: 10px 10px 5px #ccc; -moz-border-radius:25px; -webkit-border-radius:25px;" alt="img"></td>
+            <td>
+                <table style="width: 100%; height: 500px; text-align: left;" border="0">
+                    <tbody>
+                    <tr>
+                        <td colspan="3" style="height:10px;"><h4 class="mb-4">Data Informasi Jasa {{data.nama_jasa.nama_jasa}}</h4><hr></td>
+                    </tr>                        
+                    <tr>
+                        <td style="width: 40%;">Jasa</td>
+                        <td>:</td>
+                        <td>{{data.jasa}}</td> 
+                    </tr>
+                    <tr>
+                        <td>Harga Jasa</td>
+                        <td>:</td>
+                        <td>RP. {{data.harga_jasa|intcomma}} / {{data.satuan_jasa}}</td>
+                    </tr>
+                    <tr>
+                        <td>Jenis Jasa</td>
+                        <td>:</td>
+                        <td>{{data.jenis_jasa}}</td>
+                    </tr>
+                    <tr>
+                        <td>Status Jasa</td>
+                        <td>:</td>
+                        {% if data.status_jasa == "Ada"%}
+                        <td><a href="" class="btn btn-success btn-sm disabled " role="button" aria-pressed="true" style=" border-radius: 50px;">{{data.status_jasa}}</a></td>
+                        {% else %}
+                        <td><a href="" class="btn btn-secondary btn-sm disabled " role="button" aria-pressed="true" style=" border-radius: 50px;">{{data.status_jasa}}</a></td>
+                        {% endif %}
+                    </tr>
+                    <tr>
+                        <td>Akun Pemilik Jasa</td>
+                        <td>:</td>
+                        <td>{{data.nama_jasa.user}}</td>
+                    </tr>
+                    <tr>
+                        <td>Pemilik Jasa</td>
+                        <td>:</td>
+                        <td>{{data.nama_jasa.nama_jasa}}</td>
+                    </tr>
+                    <tr>
+                        <td>Nomer Telepon</td>
+                        <td>:</td>
+                        <td>{{data.nama_jasa.no_telp}}</td>
+                    </tr>
+                    <tr>
+                        <td>Kecamatan</td>
+                        <td>:</td>
+                        <td>{{data.nama_jasa.kecamatan}}</td>
+                    </tr>
+                    <tr>
+                        <td>Alamat</td>
+                        <td>:</td>
+                        <td>{{data.nama_jasa.alamat}}</td>
+                    </tr>
+                    <tr>
+                        <td>Keterangan</td>
+                        <td>:</td>
+                        <td>{{data.keterangan}}</td>
+                    </tr>
+                    <tr>
+                        <td colspan="4"><a href="https://wa.me/62{{data.nama_jasa.no_telp|slice:"1:"}}" class="btn " style="border-radius: 50px; background-color: #4ed433; color: white;">Whatsapp</a></td>
+                    </tr>
+                    </tbody>
+                </table>
+            </td>
+        </tr>
+        <tr>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+        </tr>
+        </tbody>
+    </table>
+  
+
+          <div class="card mb-3" style="max-width: 100%; box-shadow: 7px 7px 20px; border-radius: 30px;">
+            <div class="card-header bg-transparent "><p>Ulasan pemesanan jasa</p>
+            </div>
+            <div class="card-body ">
+                {% if hitung == 0 %}
+                <p style="margin-top: 10px;"><b>Belum memiliki ulasan pemesanan</b></p>
+                {% else %}
+                <table border="0" style="width: 100%; background-color: rgb(240, 240, 240); border-radius: 20px;">
+                    <tbody>
+                
+                    <tr>
+                        <td style="width: 10%; " rowspan="3" ><p style="margin-left: 20px; margin-top: 5px;"><b>{{ulasan.nama_pelanggan}}</b></p></td>
+                        <td><p style="margin-top: 5px;">{% if ulasan.nilai >= 1.0 and ulasan.nilai <= 1.9  %}
+                            <img src="{% static 'img/1.png' %}" alt="img" style="width: 100px;">  {{ulasan.nilai}}
+                            {% elif ulasan.nilai >= 2.0 and ulasan.nilai <= 2.9 %}
+                            <img src="{% static 'img/2.png' %}" alt="img" style="width: 100px;">  {{ulasan.nilai}}
+                            {% elif ulasan.nilai >= 3.0 and ulasan.nilai <= 3.9 %}
+                            <img src="{% static 'img/3.png' %}" alt="img" style="width: 100px;">  {{ulasan.nilai}}
+                            {% elif ulasan.nilai >= 4.0 and ulasan.nilai <= 4.9 %}
+                            <img src="{% static 'img/4.png' %}" alt="img" style="width: 100px;">  {{ulasan.nilai}}
+                            {% elif ulasan.nilai >= 5.0 %}
+                            <img src="{% static 'img/5.png' %}" alt="img" style="width: 100px;">  {{ulasan.nilai}}
+                            {% else %}
+                            {{ulasan.nilai}}
+                            {% endif %}</p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>{{ulasan.ulasan}}</td>
+                    </tr>
+                    <tr>
+                        {% if not ulasan.upload_foto == "" %}
+                        <td><img src="{{ulasan.upload_foto.url}}" alt="" srcset="" width="100" height="100" border = "9" style="margin: 10px;"></td>
+                        {% else %}
+                        <td>&nbsp;</td>
+                        {% endif %}
+                    </tr>
+            
+
+                    </tbody>
+                </table>
+                {% endif %}
+            </div>
+            <div class="card-footer bg-transparent "><a href="{% url 'order:indexulasan' data.id%}" style="text-decoration: none;">Lihat semua</a> </div>
+          </div>
+          
+
+    <form method="POST" enctype="multipart/form-data" novalidate>
+    {% csrf_token %}
+    <h3 class="mb-4">Pemesanan Jasa</h3>
+    <table style="height: 500px; width: 100%; margin-bottom: 30px; box-shadow: 7px 7px 20px; border-radius: 30px; " border="0">
+        <tbody>
+        <tr> 
+            <td>&nbsp;</td>
+            <td colspan="5" style="height: 10px;"><h4 class="mb-4" style="margin-top:20px;">Isikan data pemesanan anda dengan benar</h4><hr></td>
+        </tr>
+        <tr>
+            <td>&nbsp;</td>
+            <td style="width: 30%;">Nama Pemesan Jasa</td>
+            <td>:</td>
+            <td>{{form.nama_order|as_crispy_field}}</td>
+            <td>&nbsp;</td>
+        </tr>
+        <tr>
+            <td>&nbsp;</td>
+            <td style="width: 30%;">No. Telepon</td>
+            <td>:</td>
+            <td>{{form.telp_order|as_crispy_field}}</td>
+            <td>&nbsp;</td>
+        </tr>
+        <tr>
+            <td>&nbsp;</td>
+            <td>Jumlah Pemesanan</td>
+            <td>:</td>
+            <td>{{form.jumlah_order|as_crispy_field}}</td>
+            <td>&nbsp;</td>
+        </tr>
+        <tr>
+            <td>&nbsp;</td>
+            <td>Kecamatan</td>
+            <td>:</td>
+            <td>{{form.kecamatan_order|as_crispy_field}}
+            </td>
+            <td>&nbsp;</td>
+        </tr>
+        <tr>
+            <td>&nbsp;</td>
+            <td>Alamat Pemesan</td>
+            <td>:</td>
+            <td>{{form.alamat_order|as_crispy_field}}</td>
+            <td>&nbsp;</td>
+        </tr>
+        <tr>
+            <td>&nbsp;</td>
+            <td>Catatan Pemesanan</td>
+            <td>:</td>
+            <td>{{form.catatan_order|as_crispy_field}}</td>
+            <td>&nbsp;</td>
+        </tr>
+
+        <tr>
+            <td>&nbsp;</td>
+            <td><button type="submit" class="btn btn-md btn-primary" style="margin-right: 10px; margin-bottom: px; border-radius: 50px; ">Pesan</button></td>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+        </tr>
+        <tr>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+        </tr>        
+        </tbody>
+        </table>
+    </form>
+</div>
+{% endblock konten %}

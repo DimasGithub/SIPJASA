@@ -1,0 +1,99 @@
+{% extends "dasar.html" %}
+{% block style %}
+<style>
+td{
+  vertical-align: top;
+}
+</style>
+{% endblock style %}
+{% block nav %}
+{% include "snippets/nav3.html" %}
+{% endblock nav %}
+{% block konten %}
+
+<div style="margin:10px;">
+<h2 class="mb-4"><a href="{% url 'index' %} "><span class="fa fa-arrow-left"></span></a> {{header}}</h2>
+    <table style="width: 100%; margin-bottom: 30px; box-shadow: 7px 7px 20px; border-radius: 30px; border:1px;" >
+        <tbody>
+        <tr>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+        </tr>
+        <tr>
+            <td>&nbsp;</td>
+            <td style="width:40%"><img src="{{data2.profile_photo.url}}" style="width: 450px; height: 450px; text-align: right; border-radius: 50%; padding: 0px; -moz-box-shadow: 10px 10px 5px #ccc; -webkit-box-shadow: 10px 10px 5px #ccc; box-shadow: 10px 10px 5px #ccc; -moz-border-radius:25px; -webkit-border-radius:25px;" alt="img"></td>
+            <td>
+                <table style="width: 100%; height: 500px; text-align: left;" border="0">
+                    <tbody>
+                    <tr>
+                    <td colspan="3" style="height:10px;"><h4 class="mb-4">Data Informasi</h4><hr></td>
+                    <td>&nbsp;</td>
+                    </tr>
+                    <tr>
+                    <td colspan="3" style="height:5px;">           
+                    {% for message in messages %}
+                        <div class="alert alert-{{ message.tags }} alert-dismissible" role="alert">
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                        </button>
+                        {{ message }}
+                        </div>
+                    {% endfor %}
+                    </td>
+                    <td>&nbsp;</td>
+                    </tr>                                        
+                    <tr>
+                        <td style="width: 40%;">Nama Lengkap</td>
+                        <td>:</td>
+                        <td>{{data1.first_name}} {{data1.last_name}}</td>
+                        <td>&nbsp;</td>
+                    </tr>
+                    <tr>
+                        <td style="width: 40%;">Nama Pengguna</td>
+                        <td>:</td>
+                        <td>{{data1.username}}</td>
+                        <td>&nbsp;</td>
+                    </tr>
+                    <tr>
+                        <td>Email</td>
+                        <td>:</td>
+                        <td>{{data1.email}}</td>
+                        <td>&nbsp;</td>
+                    </tr>
+                    <tr>
+                        <td>Jenis Kelamin</td>
+                        <td>:</td>
+                        <td>{{data2.gender}}</td>
+                        <td>&nbsp;</td>
+                    </tr>
+                    <tr>
+                        <td>Tanggal Lahir</td>
+                        <td>:</td>
+                        <td>{{data2.dob|date:"j F Y"}}</td>
+                        <td>&nbsp;</td>
+                    </tr>
+                    <tr>
+                        <td>Status Akun</td>
+                        <td>:</td>
+                        <td>{{data3}}</td>
+                        <td>&nbsp;</td>
+                    </tr>
+                    <tr>
+                        <td colspan="3"><a href="{% url 'register:editprofil' %}" class="btn btn-primary btn-md " style="border-radius: 50px; margin-top:5px; margin-right:20px; " role="button" aria-pressed="true">Ubah Profil</a>
+                        <a href="{% url 'register:changepassword' %}" class="btn btn-primary btn-md " style="border-radius: 50px; margin-top:5px; " role="button" aria-pressed="true">Ubah Kata Sandi</a>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </td>
+        </tr>
+        <tr>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+        </tr>
+        </tbody>
+    </table>
+    </div>
+{% endblock konten %}

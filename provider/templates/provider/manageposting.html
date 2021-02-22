@@ -1,0 +1,56 @@
+{% extends "dasar.html" %}
+{% load humanize %}
+{% block nav %}
+{% include "snippets/navprovider.html" %}
+{% endblock nav %}
+{% block modaldelete %}
+{% include "snippets/modaldelete.html"%}
+{% endblock modaldelete %}
+{% block konten %}
+
+
+<div style="margin: 20px;">
+<h2 class="mb-4">{{header}}</h2>
+<p>Kelola postingan jasa anda dengan benar</p>
+{% for message in messages %}
+<div class="alert alert-{{ message.tags }} alert-dismissible" role="alert">
+<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+<span aria-hidden="true">&times;</span>
+</button>
+{{ message }}
+</div>
+{% endfor %}
+<div style="margin: 0; box-shadow: 7px 7px 20px; border-radius: 20px;">
+<a href="{% url 'provider:postingjasa' %}" class="btn btn-primary btn-md " style="border-radius: 50px; margin-left:20px; margin-top:5px; " role="button" aria-pressed="true">Tambah</a>
+<div style="margin : 20px;">
+<table id=""class="table" border="1" >
+  <thead class="thead-dark">
+    <tr>
+      <th scope="col">No.</th>
+      <th scope="col">Nama Jasa</th>
+      <th scope="col">Harga Jasa</th>
+      <th scope="col">Jenis Jasa</th>
+      <th scope="col">Status Jasa</th>
+      <th scope="col">Aksi</th>
+    </tr>
+  </thead>
+  <tbody>
+  {% for a in data %}
+   <tr>
+      <th scope="row" >{{forloop.counter|add:0}}</th>
+      <td>{{a.jasa}}</td>
+      <td>Rp. {{a.harga_jasa|intcomma}} / {{a.satuan_jasa}}</td>
+      <td>{{a.jenis_jasa}}</td>
+      <td>{{a.status_jasa}}</td>
+      <td>
+      <a href="{% url 'provider:editposting' a.id %}" class="btn btn-warning btn-sm " style="border-radius: 50px;" role="button" aria-pressed="true">Ubah</a>
+      <a href="{% url 'provider:deleteposting' a.id %}" style="border-radius: 50px;" class="confirm-delete btn btn-danger btn-sm" title="Delete" data-toggle="modal" data-target="#confirmDeleteModal" id="deleteButton{{a.id}}">Hapus</a>
+      </td>
+    </tr>
+  {% endfor %}
+  </tbody>
+</table>
+</div>
+</div>
+</div>
+{% endblock konten %}
