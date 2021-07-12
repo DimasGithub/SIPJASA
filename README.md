@@ -21,6 +21,6 @@ information system and ordering services for the Pemalang district using django 
 <ol>
 <h3>Result </h3>
 
-<img src = 'https://github.com/DimasGithub/ternak/blob/master/Screenshot%20from%202021-07-12%2011-47-43.png'/>
-<img src = 'https://github.com/DimasGithub/ternak/blob/master/Screenshot%20from%202021-07-12%2011-56-11.png'/>
-<img src = 'https://github.com/DimasGithub/ternak/blob/master/terkahir.png'/>
+<img src = 'https://github.com/DimasGithub/SIPJASA/blob/master/127.0.0.1_8000_.png'/>
+<img src = 'https://github.com/DimasGithub/SIPJASA/blob/master/127.0.0.1_8000_details_35.png'/>
+<img src = 'https://github.com/DimasGithub/SIPJASA/blob/master/127.0.0.1_8000_details_detailsjasa_28.png'/>
