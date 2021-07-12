@@ -24,3 +24,5 @@ information system and ordering services for the Pemalang district using django 
 <img src = 'https://github.com/DimasGithub/SIPJASA/blob/master/127.0.0.1_8000_.png'/>
 <img src = 'https://github.com/DimasGithub/SIPJASA/blob/master/127.0.0.1_8000_details_35.png'/>
 <img src = 'https://github.com/DimasGithub/SIPJASA/blob/master/127.0.0.1_8000_details_detailsjasa_28.png'/>
+
+<h3>there are still many features that I haven't screenshoot yet/h3>
